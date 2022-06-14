@@ -23,15 +23,13 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route
-          path="/admin"
+          path="/admin/*"
           element={
             <PrivateRoute>
               <Admin />
             </PrivateRoute>
           }
         >
-          <Route path="dashboard" element={<Dashboard />}></Route>
-          <Route path="students" element={<Students />}></Route>
         </Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
