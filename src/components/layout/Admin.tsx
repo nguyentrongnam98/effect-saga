@@ -17,10 +17,7 @@ function Admin() {
         <Sidebar />
       </Box>
       <Box className="main">
-        <Routes>
-          <Route path="dashboard" element={<Dashboard />}></Route>
-          <Route path="students" element={<Students />}></Route>
-        </Routes>
+        <Outlet/>
       </Box>
     </Box>
   );
