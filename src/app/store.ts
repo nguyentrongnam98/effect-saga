@@ -3,15 +3,17 @@ import createSagaMiddleware from 'redux-saga';
 import authReducer from '../features/auth/authSlice';
 import counterReducer from '../features/counter/counterSlice';
 import { rootSaga } from './rootSaga';
+import { combineReducers } from 'redux';
 
 
 const sagaMiddlware = createSagaMiddleware()
+const rootReducer = combineReducers({
+  counter: counterReducer,
+  auth:authReducer
+})
 export const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-    auth:authReducer
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddlware)
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}).concat(sagaMiddlware)
 });
 
 sagaMiddlware.run(rootSaga)

@@ -21,18 +21,18 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login: (state, action:PayloadAction<LoginAccount>) => {
+    login: (state:any, action:PayloadAction<LoginAccount>) => {
         state.logging = true
     },
-    loginSuccess: (state, action) => {
+    loginSuccess: (state:any, action:any) => {
         state.logging = false
         state.isLoggedIn = true
         state.currentUser = action.payload
     },
-    loginFaild: (state, action) => {
+    loginFaild: (state:any, action:any) => {
         state.logging = false
     },
-    logout: (state) => {
+    logout: (state:any,action:PayloadAction<any>) => {
         state.isLoggedIn = false;
         state.currentUser = undefined
     },

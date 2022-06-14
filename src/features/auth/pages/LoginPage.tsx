@@ -4,6 +4,7 @@ import './styles.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout } from '../authSlice';
 import { useNavigate } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
 function LoginPage() {
   const dispatch = useDispatch();
   const naviagate = useNavigate();
@@ -16,15 +17,11 @@ function LoginPage() {
       onSuccess:() => naviagate('/admin')
     }))
   } 
-  const handleLogout = () => {
-    dispatch(logout())
-  } 
   return (
     <div className='root'>
       <h1>Student management</h1>
       <div className='login'>
-        <button onClick={handleLogin}>Fake login</button>
-        <button onClick={handleLogout}>Fake logout</button>
+        <button onClick={handleLogin}>{logging && <CircularProgress size={20} color="secondary"/>}Fake login</button>
       </div>
     </div>
   )

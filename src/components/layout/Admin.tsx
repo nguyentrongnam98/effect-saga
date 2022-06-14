@@ -1,9 +1,29 @@
-import React from 'react'
-
+import React from "react";
+import "./Admin.css";
+import Box from "@mui/material/Box";
+import Header from "../common/Header";
+import Sidebar from "../common/Sidebar";
+import { Routes, Route, Outlet } from "react-router-dom";
+import Dashboard from "../../features/dashboard";
+import Students from "../../features/students";
+import Main from "../common/Main";
 function Admin() {
   return (
-    <div>Admin</div>
-  )
+    <Box className="root">
+      <Box className="header">
+        <Header />
+      </Box>
+      <Box className="sidebar">
+        <Sidebar />
+      </Box>
+      <Box className="main">
+        <Routes>
+          <Route path="dashboard" element={<Dashboard />}></Route>
+          <Route path="students" element={<Students />}></Route>
+        </Routes>
+      </Box>
+    </Box>
+  );
 }
 
-export default Admin
+export default Admin;

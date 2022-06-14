@@ -7,6 +7,8 @@ import LoginPage from "./features/auth/pages/LoginPage";
 import Admin from "./components/layout/Admin";
 import NotFound from "./components/common/NotFound";
 import PrivateRoute from "./components/common/PrivateRoute";
+import Students from "./features/students";
+import  Dashboard  from "./features/dashboard";
 function App() {
   React.useEffect(() => {
     apiCity
@@ -27,7 +29,10 @@ function App() {
               <Admin />
             </PrivateRoute>
           }
-        ></Route>
+        >
+          <Route path="dashboard" element={<Dashboard />}></Route>
+          <Route path="students" element={<Students />}></Route>
+        </Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </div>

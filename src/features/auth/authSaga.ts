@@ -10,10 +10,11 @@ function* handleLogin (payload:LoginAccount) {
   payload.onSuccess()
 }
 function* handleLogout () {
-    
+  const action: PayloadAction<any> = yield take(logout.type)
     yield delay(1000)
     console.log('handle logout')
     localStorage.removeItem('token')
+    action.payload.onSuccess()
 }
 function* handleWatchLoginFlow () {
   while(true){
