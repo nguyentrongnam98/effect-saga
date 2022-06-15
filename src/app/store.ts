@@ -5,13 +5,15 @@ import counterReducer from '../features/counter/counterSlice';
 import dashboardReducer from '../features/dashboard/dashBoardSlice';
 import { rootSaga } from './rootSaga';
 import { combineReducers } from 'redux';
+import studentReducer from '../features/students/studentSlice';
 
 
 const sagaMiddlware = createSagaMiddleware()
 const rootReducer = combineReducers({
   counter: counterReducer,
   auth:authReducer,
-  dashBoard: dashboardReducer
+  dashBoard: dashboardReducer,
+  student: studentReducer
 })
 export const store = configureStore({
   reducer: rootReducer,

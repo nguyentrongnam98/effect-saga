@@ -5,8 +5,8 @@ export interface Pagination {
 }
 
 export interface Params {
-    _limit?:number,
-    _page?:number,
+    _limit:number,
+    _page:number,
     _sort?:string,
     _order?:string,
     gender?:string,

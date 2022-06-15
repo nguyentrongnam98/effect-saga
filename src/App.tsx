@@ -9,6 +9,7 @@ import NotFound from "./components/common/NotFound";
 import PrivateRoute from "./components/common/PrivateRoute";
 import Students from "./features/students";
 import  Dashboard  from "./features/dashboard";
+import AddEditPage from "./features/students/pages/AddEditPage";
 function App() {
   return (
     <div className="App">
@@ -23,7 +24,10 @@ function App() {
           }
         >
           <Route path="dashboard" element={<Dashboard />}></Route>
-          <Route path="students" element={<Students />}></Route>
+          <Route path="students/*" element={<Students />}>
+            <Route path="add" element={<AddEditPage/>}/>
+            <Route path=":studentId" element={<AddEditPage/>}/>
+          </Route>
         </Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

@@ -1,0 +1,14 @@
+.titleBox {
+    display: flex;
+    flex-flow: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.ListPageContainer {
+
+}
+.paginationBox {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
