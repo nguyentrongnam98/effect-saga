@@ -10,14 +10,6 @@ import PrivateRoute from "./components/common/PrivateRoute";
 import Students from "./features/students";
 import  Dashboard  from "./features/dashboard";
 function App() {
-  React.useEffect(() => {
-    apiCity
-      .getAll({ _limit: 10, _page: 1 })
-      .then((res) => console.log(res.pagination?._limit));
-    apiStudent
-      .getAll({ _limit: 10, _page: 1 })
-      .then((res) => console.log(res.data));
-  }, []);
   return (
     <div className="App">
       <Routes>

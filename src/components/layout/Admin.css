@@ -3,7 +3,6 @@
   grid-template-rows: auto 1fr;
   grid-template-columns: 300px 1fr;
   grid-template-areas: "header header" "sidebar main";
-  min-height: 100vh;
 }
 .header {
     grid-area: header;
@@ -13,9 +12,9 @@
 .sidebar {
     grid-area: sidebar;
     border-right:  1px solid #ccc;
-    height: 99%;
+    height: 100vh;
 }
 .main {
     grid-area: main;
-    height:100%;
+    margin-left: 10px;
 }
