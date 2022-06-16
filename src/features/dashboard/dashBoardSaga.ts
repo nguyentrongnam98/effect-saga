@@ -45,6 +45,8 @@ function* getLowesStudentList() {
   yield put(setLowesStudentList(data));
 }
 function* getRankingByCityList() {
+  console.log('hehehe');
+  
   const { data: cityList }: listResponse<city> = yield call(apiCity.getAll, {
     _limit: 5,
     _page: 1,

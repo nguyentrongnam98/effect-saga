@@ -37,6 +37,9 @@ const studentSlice = createSlice({
         },
         setFilter: (state,action:PayloadAction<Params>) => {
           state.filter = action.payload
+        },
+        setFilterWithDebounce: (state,action:PayloadAction<Params>) => {
+
         }
     }
 })
@@ -45,7 +48,8 @@ export const {
     fetchStudentList,
     fetchStudentListFaild,
     fetchStudentListSuccess,
-    setFilter
+    setFilter,
+    setFilterWithDebounce
 } = studentSlice.actions;
 
 export const selectStudentList = (state:RootState) => state.student.list

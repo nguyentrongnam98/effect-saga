@@ -1,7 +1,5 @@
 import React from "react";
 import "./App.css";
-import apiCity from "./api/cityApi";
-import apiStudent from "./api/studentApi";
 import { Routes, Route } from "react-router-dom";
 import LoginPage from "./features/auth/pages/LoginPage";
 import Admin from "./components/layout/Admin";

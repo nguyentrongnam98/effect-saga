@@ -9,18 +9,25 @@ import {
   selectPaginationStudentList,
   selectStudentList,
   setFilter,
+  setFilterWithDebounce,
 } from "../studentSlice";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 import "./ListPage.css";
+import { selectcityMap, selectDataCityList } from "../../city/citySlice";
+import StudentFilter from "../components/StudentFilter";
+import { Params } from "../../../models";
+
 
 export default function ListPage() {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilterStudentList);
   const studentList = useSelector(selectStudentList);
   const pagination = useSelector(selectPaginationStudentList);
-  const loading = useSelector(selectLoadingStudentList)
+  const loading = useSelector(selectLoadingStudentList);
+  const cityMap = useSelector(selectcityMap);
+  const cityList = useSelector(selectDataCityList);
   const handlePageChange = (e: any, page: number) => {
     const payload = {
         ...filter,
@@ -28,6 +35,12 @@ export default function ListPage() {
     }
     dispatch(setFilter(payload))
   };
+  const handleSearchChange = (newFilter:Params) => {
+     dispatch(setFilterWithDebounce(newFilter))
+  }
+  const handleSelectChange = (newFilter:Params) => {
+    dispatch(setFilter(newFilter))
+  }
   React.useEffect(() => {
     dispatch(fetchStudentList(filter));
   }, [filter]);
@@ -41,7 +54,10 @@ export default function ListPage() {
           Add new student
         </Button>
       </Box>
-      <StudentsTable studentList={studentList} />
+      <Box mb={3} className="boxFilter">
+         <StudentFilter filter={filter} cityList={cityList} onSearchChange={handleSearchChange} onSelectChange={handleSelectChange}/>
+      </Box>
+      <StudentsTable studentList={studentList} cityMap={cityMap}/>
       <Box className="paginationBox">
         <Stack spacing={2}>
           <Pagination

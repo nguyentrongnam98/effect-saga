@@ -26,7 +26,7 @@ function Dashboard(props: DashboardProps) {
   const loading = useSelector(selectDashBoardLoading);
   const highesStudentList = useSelector(selectDashBoardHighesStudentList);
   const lowesStudentList = useSelector(selectDashBoardLowesStudentList);
-  const rankingByCityList = useSelector(selectDashRankingByCityList)
+  const rankingByCityList = useSelector(selectDashRankingByCityList);
   useEffect(() => {
     dispatch(fetchData());
   }, []);
@@ -81,13 +81,13 @@ function Dashboard(props: DashboardProps) {
       <Box mt={4}>
         <Typography variant="h4">Ranking by city</Typography>
         <Grid container spacing={3}>
-        {rankingByCityList.map(ranking => (
-               <Grid item xs={12} md={6} lg={3} key={ranking.cityId}>
-               <Widget title={ranking.cityName}>
-                 <StudentRankingList studentList={ranking.rankingList} />
-               </Widget>
-             </Grid>
-        ))}
+          {rankingByCityList.map((ranking) => (
+            <Grid item xs={12} md={6} lg={3} key={ranking.cityId}>
+              <Widget title={ranking.cityName}>
+                <StudentRankingList studentList={ranking.rankingList} />
+              </Widget>
+            </Grid>
+          ))}
         </Grid>
       </Box>
     </Box>

@@ -13,11 +13,13 @@ import { capitalizeStr, getMarkColor } from "../../../ultils";
 import { Box } from "@mui/system";
 export interface StudentsTableProps {
   studentList: student[];
+  cityMap:any;
   onEdit?: () => void;
   onRemove?: () => void;
 }
 export default function StudentsTable({
   studentList,
+  cityMap,
   onEdit,
   onRemove,
 }: StudentsTableProps) {
@@ -50,7 +52,7 @@ export default function StudentsTable({
               <TableCell align="left">
                 <Box color={getMarkColor(student.mark)}>{student.mark}</Box>
               </TableCell>
-              <TableCell align="left">{student.city}</TableCell>
+              <TableCell align="left">{cityMap[student?.city]?.name}</TableCell>
               <TableCell align="left">
                 <Button
                   color="primary"
