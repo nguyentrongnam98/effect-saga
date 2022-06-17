@@ -11,11 +11,16 @@ import { Button } from "@mui/material";
 import "./table.css";
 import { capitalizeStr, getMarkColor } from "../../../ultils";
 import { Box } from "@mui/system";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 export interface StudentsTableProps {
   studentList: student[];
   cityMap:any;
-  onEdit?: () => void;
-  onRemove?: () => void;
+  onEdit?: (studen:student) => void;
+  onRemove?: (studen:student) => void;
 }
 export default function StudentsTable({
   studentList,
@@ -23,7 +28,22 @@ export default function StudentsTable({
   onEdit,
   onRemove,
 }: StudentsTableProps) {
+  const [open, setOpen] = React.useState(false);
+  const [selectedStudent,setSelectedStudent] = React.useState<student>()
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleRemove = (student?:student) => {
+    setSelectedStudent(student)
+    setOpen(true)
+  }
+  const handleRemoveConfirm = (student:student) => {
+      onRemove?.(student)
+      setOpen(false)
+  }
   return (
+    <>
     <TableContainer component={Paper}>
       <Table aria-label="simple table" sx={{ maxWidth: "100%" }}>
         <TableHead>
@@ -58,14 +78,14 @@ export default function StudentsTable({
                   color="primary"
                   variant="contained"
                   className="mtr"
-                  onClick={() => onEdit?.()}
+                  onClick={() => onEdit?.(student)}
                 >
                   Edit
                 </Button>
                 <Button
                   variant="outlined"
                   color="secondary"
-                  onClick={() => onRemove?.()}
+                  onClick={() => handleRemove(student)}
                 >
                   Remove
                 </Button>
@@ -75,5 +95,30 @@ export default function StudentsTable({
         </TableBody>
       </Table>
     </TableContainer>
+
+    <div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Remove student"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure to remove student named {selectedStudent?.name}.<br/> This action can&apos;t be undo.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" variant="outlined">Cancel</Button>
+          <Button onClick={() => handleRemoveConfirm(selectedStudent as student)} autoFocus color="secondary" variant="contained">
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+    </>
   );
 }

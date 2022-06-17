@@ -17,8 +17,9 @@ import Stack from "@mui/material/Stack";
 import "./ListPage.css";
 import { selectcityMap, selectDataCityList } from "../../city/citySlice";
 import StudentFilter from "../components/StudentFilter";
-import { Params } from "../../../models";
-
+import { Params, student } from "../../../models";
+import apiStudent from "../../../api/studentApi";
+import { useNavigate } from 'react-router-dom';
 
 export default function ListPage() {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export default function ListPage() {
   const loading = useSelector(selectLoadingStudentList);
   const cityMap = useSelector(selectcityMap);
   const cityList = useSelector(selectDataCityList);
+  const navigate = useNavigate()
   const handlePageChange = (e: any, page: number) => {
     const payload = {
         ...filter,
@@ -41,6 +43,18 @@ export default function ListPage() {
   const handleSelectChange = (newFilter:Params) => {
     dispatch(setFilter(newFilter))
   }
+  const handleRemoveStudent = async (student:student) => {
+    try {
+      await apiStudent.removeStudent(student?.id)
+      const cloneFilter = {...filter}
+      dispatch(setFilter(cloneFilter))
+    } catch (error) {
+      console.log('error',error);
+    }
+  }
+  const handleEditStudent = async (studen:student) => {
+    navigate(`${studen?.id}`)
+  }
   React.useEffect(() => {
     dispatch(fetchStudentList(filter));
   }, [filter]);
@@ -50,14 +64,14 @@ export default function ListPage() {
         {loading && <LinearProgress/>}
       <Box className="titleBox">
         <Typography variant="h4">Students</Typography>
-        <Button color="primary" variant="contained">
+        <Button color="primary" variant="contained" onClick={() =>navigate('add')}>
           Add new student
         </Button>
       </Box>
       <Box mb={3} className="boxFilter">
          <StudentFilter filter={filter} cityList={cityList} onSearchChange={handleSearchChange} onSelectChange={handleSelectChange}/>
       </Box>
-      <StudentsTable studentList={studentList} cityMap={cityMap}/>
+      <StudentsTable studentList={studentList} cityMap={cityMap} onRemove={handleRemoveStudent} onEdit={handleEditStudent}/>
       <Box className="paginationBox">
         <Stack spacing={2}>
           <Pagination

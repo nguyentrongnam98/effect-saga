@@ -6,7 +6,7 @@ const apiStudent = {
     const url = "/students";
     return axiosClient.get(url, { params });
   },
-  getStudentById(id:string | number):Promise<student> {
+  getStudentById(id?:string | number):Promise<student> {
     const url = `/students/${id}`;
     return axiosClient.get(url)
   },
@@ -15,10 +15,10 @@ const apiStudent = {
     return axiosClient.post(url, data);
   },
   updateStudent(data: student): Promise<student> {
-    const url = "/students";
+    const url = `/students/${data.id}`;
     return axiosClient.patch(url, data);
   },
-  removeStudent(id: string | number): Promise<any> {
+  removeStudent(id?: string | number): Promise<any> {
     const url = `/students/${id}`;
     return axiosClient.delete(url);
   },
