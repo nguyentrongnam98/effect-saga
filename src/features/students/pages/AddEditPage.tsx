@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import * as React from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import apiStudent from "../../../api/studentApi";
 import { student } from "../../../models";
 import StudentForm from "../components/StudentForm";
@@ -38,6 +39,15 @@ export default function AddEditPage() {
        await apiStudent.addStudent(formValue)
     }
     // throw new Error('CLGT')
+    toast.success('🦄 Wow so easy!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
     navigate(-1)
   };
   return (
