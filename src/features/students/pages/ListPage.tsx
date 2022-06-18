@@ -20,6 +20,7 @@ import StudentFilter from "../components/StudentFilter";
 import { Params, student } from "../../../models";
 import apiStudent from "../../../api/studentApi";
 import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 export default function ListPage() {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ export default function ListPage() {
       await apiStudent.removeStudent(student?.id)
       const cloneFilter = {...filter}
       dispatch(setFilter(cloneFilter))
+      toast.success('Remove successfully !')
     } catch (error) {
       console.log('error',error);
     }
